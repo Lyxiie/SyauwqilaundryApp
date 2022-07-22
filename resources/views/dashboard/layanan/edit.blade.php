@@ -50,7 +50,7 @@
           </div>
 
 
-       <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+       <button type="submit" class="btn btn-primary" onclick="return confirm('Yakin menyimpan perubahan?')">Simpan Perubahan</button>
       </form>
 
 </div>

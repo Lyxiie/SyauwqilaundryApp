@@ -32,35 +32,24 @@ class DatabaseSeeder extends Seeder
         ]);
         Layanan::create([
             'id_layanan' => '001',
-            'nama_layanan' => 'Quick',
-            'harga_layanan' => '10000',
+            'nama_layanan' => 'Regular',
+            'harga_layanan' => '3000',
             'waktu' => '3'
+        ]);
+        Layanan::create([
+            'id_layanan' => '002',
+            'nama_layanan' => 'Quick',
+            'harga_layanan' => '5000',
+            'waktu' => '2'
+        ]);
+        Layanan::create([
+            'id_layanan' => '003',
+            'nama_layanan' => 'Express',
+            'harga_layanan' => '7000',
+            'waktu' => '1'
         ]);
 
         User::factory(3)->create();
-
-        Category::create([
-            'name'=>'Web Programming',
-            'slug'=>'web-programming'
-        ]);
-
-        Category::create([
-            'name'=>'Personal',
-            'slug'=>'personal'
-        ]);
-
-        Category::create([
-            'name'=>'Design',
-            'slug'=>'design'
-        ]);
-
-        Category::create([
-            'name'=>'Game',
-            'slug'=>'game'
-        ]);
-
-
-        Post::factory(30)->create();
 
         // Post::create([
         //     'title'=> 'Judul Pertama',

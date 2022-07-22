@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($pesanan as $key=>$pesan )
+        @foreach ($pesanan as $pesan )
 
         <tr>
           <td>{{ $loop->iteration }}</td>
@@ -38,7 +38,7 @@
           <td>{{ $pesan->nama }}</td>
           <td>{{ $pesan->no_hp }}</td>
           {{-- <td>{{ $p->tipe_layanan }}</td> --}}
-          <td>{{ $pesan->nama_layanan }}</td>
+          <td>{{ $pesan->layanan }}</td>
           <td>{{ $pesan->jml_satuan }}</td>
           <td>{{ $pesan->tgl_masuk }}</td>
           <td>{{ $pesan->tgl_selesai }}</td>
@@ -46,9 +46,9 @@
 
           <td>
 
-            <a href="{{ url('/dashboard/pesanan/'.$pesan->id.'/edit') }}" class="badge bg-warning"><span data-feather="edit"></span></a>
+            <a href="/dashboard/pesanan/{{ $pesan->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a>
 
-            <form action="{{ url('/dashboard/pesanan/'.$pesan->id) }}" method="post" class="d-inline">
+            <form action="/dashboard/pesanan/{{ $pesan->id }}" method="post" class="d-inline">
                 @method('delete')
                 @csrf
                 <button class="badge bg-success border-0" onclick="return confirm('Anda Yakin Menyelesaikan Pesanan?')"><span data-feather="check"></span></button>

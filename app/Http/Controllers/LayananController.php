@@ -43,8 +43,8 @@ class LayananController extends Controller
         $validatedData = $request ->validate([
             'id_layanan' => 'required',
             'nama_layanan' => 'unique:layanans|required',
-            'harga_layanan' => 'required',
-            'waktu' => 'required',
+            'harga_layanan' => 'required|min:0',
+            'waktu' => 'required|numeric|min:1',
 
         ]);
 
@@ -93,7 +93,7 @@ class LayananController extends Controller
         $model ->waktu = $request->waktu;
         $model->save();
 
-        return redirect('dashboard/layanan');
+        return redirect('dashboard/layanan')->with('success', 'Layanan berhasil di perbarui!');
     }
 
     /**
@@ -106,6 +106,6 @@ class LayananController extends Controller
     {
         $model = Layanan::find($id);
         $model->delete();
-        return redirect('dashboard/layanan');
+        return redirect('dashboard/layanan')->with('success', 'Layanan berhasil di hapus!');
     }
 }

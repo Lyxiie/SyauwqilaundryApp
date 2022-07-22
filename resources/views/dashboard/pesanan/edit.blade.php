@@ -5,7 +5,7 @@
 </div>
 <div class="col-lg-8">
 
-    <form method="POST" action="{{ url('/dashboard/pesanan/'.$model->id) }}" class="mb-5" enctype="multipart/form-data">
+    <form method="post" action="{{ url('/dashboard/pesanan/'.$model->id) }}" class="mb-5" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="_method" value="PATCH">
         <div class="mb-3">
@@ -110,7 +110,7 @@
             @enderror
           </div>
 
-       <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+       <button type="submit" class="btn btn-primary" onclick="return confirm('Yakin menyimpan perubahan?')">Simpan Perubahan</button>
       </form>
 
 </div>

@@ -88,7 +88,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary">Update Post</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Yakin menyimpan perubahan?')">Update Post</button>
     </form>
 
 </div>

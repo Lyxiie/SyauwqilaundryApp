@@ -49,7 +49,7 @@
           </div>
 
 
-       <button type="submit" class="btn btn-primary">Tambah Layanan</button>
+       <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data layanan baru sudah benar?')">Tambah Layanan</button>
       </form>
 
 </div>

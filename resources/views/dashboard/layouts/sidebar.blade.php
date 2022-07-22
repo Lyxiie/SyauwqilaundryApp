@@ -13,12 +13,8 @@
               Profile
             </a>
           </li>
-        {{-- <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' :'' }}" href="/dashboard/posts">
-            <span data-feather="file-text"></span>
-            My Posts
-          </a>
-        </li> --}}
+
+        {{-- @if (auth()->user()->is_admin == 0) --}}
         <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/pesanan*') ? 'active' :'' }}" href="/dashboard/pesanan">
               <span data-feather="file-text"></span>
@@ -26,6 +22,8 @@
             </a>
           </li>
       </ul>
+        {{-- @endif --}}
+
 
       @can('admin')
 
@@ -33,18 +31,13 @@
           <span>Menu Pemilik</span>
       </h6>
       <ul class="nav flex-column">
-        {{-- <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' :'' }}" href="/dashboard/categories">
-                <span data-feather="grid"></span>
-                Post Categories
-            </a> --}}
-        </li>
+
       </ul>
 
       <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/users*') ? 'active' :'' }}" href="/dashboard/users">
-                <span data-feather="grid"></span>
+                <span data-feather="users"></span>
                 Data Pegawai
             </a>
         </li>
@@ -62,7 +55,7 @@
       <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ Request::is('dashboard/laporan*') ? 'active' :'' }}" href="/dashboard/laporan">
-                <span data-feather="grid"></span>
+                <span data-feather="bar-chart-2"></span>
                 Laporan Keuangan
             </a>
         </li>

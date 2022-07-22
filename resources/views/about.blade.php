@@ -6,7 +6,7 @@
     <img src="img/{{ $image }}" alt="{{ $name }}" width="200" class="img-thumbnail rounded-circle"> --}}
 
 
-        <div class="scroll-up-btn">
+        {{-- <div class="scroll-up-btn">
             <i class="fas fa-angle-up"></i>
         </div>
 
@@ -236,6 +236,6 @@
 
         <footer>
             <span>Created By <a href="#">Muhamad Ridwan</a> | <span class="far fa-copyright"></span> 2020 All right reserved.</span>
-        </footer>
+        </footer> --}}
 
 @endsection

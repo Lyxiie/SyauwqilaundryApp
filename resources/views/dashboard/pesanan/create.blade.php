@@ -5,6 +5,16 @@
 </div>
 <div class="col-lg-8">
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @else
+
     <form method="POST" action="/dashboard/pesanan" class="mb-5" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -110,8 +120,9 @@
             @enderror
           </div>
 
-       <button type="submit" class="btn btn-primary">Tambah Pesanan</button>
+       <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data pesanan baru sudah benar?')">Tambah Pesanan</button>
       </form>
+      @endif
 
 </div>
 @endsection

@@ -17,9 +17,14 @@ class PesananController extends Controller
     public function index()
     {
 
-        $pesanan = DB::table('pesanans')
-        ->join('layanans', 'pesanans.layanan', '=', 'layanans.id')->get();
-        return view('dashboard.pesanan.index', compact('pesanan'));
+        // $pesanans = DB::table('pesanans')
+        // ->join('layanans', 'pesanans.layanan', '=', 'layanans.id')->get();
+        // return view('dashboard.pesanan.index', compact('pesanan'));
+
+        return view('dashboard.pesanan.index', [
+            'pesanan' => Pesanan::all(),
+
+        ]);
     }
 
     /**
@@ -42,19 +47,31 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        $model =  new Pesanan;
-        $model ->id_pesanan = $request->id_pesanan;
-        $model ->nama = $request->nama;
-        $model ->no_hp = $request->no_hp;
-        $model ->layanan = $request->layanan_id;
-        $model ->jml_satuan = $request->jml_satuan;
-        $model ->tgl_masuk = $request->tgl_masuk;
-        $model ->tgl_selesai = $request->tgl_selesai;
-        $model ->total = $request->total;
-        $model->save();
+        // $model =  new Pesanan;
+        // $model ->id_pesanan = $request->id_pesanan;
+        // $model ->nama = $request->nama;
+        // $model ->no_hp = $request->no_hp;
+        // $model ->layanan = $request->layanan_id;
+        // $model ->jml_satuan = $request->jml_satuan;
+        // $model ->tgl_masuk = $request->tgl_masuk;
+        // $model ->tgl_selesai = $request->tgl_selesai;
+        // $model ->total = $request->total;
+        // $model->save();
 
-        return redirect('dashboard/pesanan');
+        $model = $request->validate([
+            'id_pesanan' => 'required|unique:pesanans',
+            'nama' => 'required|min:3',
+            'no_hp' => 'nullable',
+            'jml_satuan' => 'required|numeric',
+            'tgl_masuk' => 'required',
+            'tgl_selesai' => 'required|date|after:tgl_masuk',
+            'total' => 'required|numeric|min:0',
+        ]);
+        $model['layanan'] = $request->layanan_id;
+        Pesanan::create($model);
+        return redirect('/dashboard/pesanan')->with('success', 'Pesanan berhasil di tambahkan!');
     }
+
 
     /**
      * Display the specified resource.
@@ -100,7 +117,7 @@ class PesananController extends Controller
         $model ->total = $request->total;
         $model->save();
 
-        return redirect('dashboard/pesanan');
+        return redirect('dashboard/pesanan')->with('success', 'Pesanan berhasil di perbarui!');
     }
 
     /**
@@ -113,6 +130,6 @@ class PesananController extends Controller
     {
         $model = Pesanan::find($id);
         $model->delete();
-        return redirect('dashboard/pesanan');
+        return redirect('dashboard/pesanan')->with('success', 'Pesanan dengan ID Pesanan '.$model->id_pesanan.' telah diselesaikan');
     }
 }

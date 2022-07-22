@@ -96,7 +96,7 @@
 
 
 
-        <button type="submit" class="btn btn-primary">Create User</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data user baru sudah benar?')">Create User</button>
       </form>
 
 </div>
