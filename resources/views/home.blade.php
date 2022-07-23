@@ -76,7 +76,7 @@
                         <div class="column left">
                             <div class="text">SYAUWQILAUNDRY</div>
                             <p>Syauwqilaundry dikelola oleh Syauwqilaundry telah berdiri sejak tahun... dan telah melayani lebih dari ribuan pelayanan. Syauwqilaundry sendiri dikelola oleh ... dari awal pembukaan jasa laundry. Berlokasi di Jl. Sekeloa Tengah No.11, Syauwqilaundry telah menjadi tempat laundry yang terkenal dan terpercaya.</p>
-                            <a href="#">Read more</a>
+                            <a href="">Read more</a>
                         </div>
                         <div class="column right">
                             <div class="bars">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="card">
                             <div class="box">
-                                <img src="img/image1.jpg" alt="">
+                                <img src="img/fahmi.jpeg" alt="">
                                 <div class="text">Ahmad Fahmi Fahlevi</div>
                                 <p>System Analyst</p>
                             </div>
@@ -213,7 +213,7 @@
                                     <textarea cols="30" rows="10" placeholder="Ketikan Pesan..." required></textarea>
                                 </div>
                                 <div class="button">
-                                    <button type="submit">Kirim</button>
+                                    <button type="submit" onclick="return confirm('Pesan akan di kirim, apakah Anda yankin?')">Kirim</button>
                                 </div>
                         </form>
                     </div>
@@ -222,7 +222,7 @@
         </section>
         <!-- footer section -->
             <footer>
-                <span>Created By <a href="#">Syauwqilaundry</a> | <span class="far fa-copyright"></span> 2022 All right reserved.</span>
+                <span>Created By <a href="#">Muhamad Ridwan</a> | <span class="far fa-copyright"></span> 2022 All right reserved.</span>
             </footer>
 
 

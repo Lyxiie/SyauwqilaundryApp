@@ -5,16 +5,6 @@
 </div>
 <div class="col-lg-8">
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @else
-
     <form method="POST" action="/dashboard/pesanan" class="mb-5" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -98,7 +88,7 @@
 
             @enderror
           </div>
-          <div class="mb-3">
+          {{-- <div class="mb-3">
             <label for="tgl_selesai" class="form-label">Tanggal Selesai</label>
 
             <input type="date" class="form-control @error('tgl_selesai') is-invalid @enderror" id="tgl_selesai" name="tgl_selesai" required autofocus>
@@ -118,11 +108,10 @@
             </div>
 
             @enderror
-          </div>
+          </div> --}}
 
        <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah data pesanan baru sudah benar?')">Tambah Pesanan</button>
       </form>
-      @endif
 
 </div>
 @endsection

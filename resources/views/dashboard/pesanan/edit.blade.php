@@ -88,7 +88,7 @@
 
             @enderror
           </div>
-          <div class="mb-3">
+          {{-- <div class="mb-3">
             <label for="tgl_selesai" class="form-label">Tanggal Selesai</label>
 
             <input type="text" class="form-control @error('tgl_selesai') is-invalid @enderror" id="tgl_selesai" name="tgl_selesai" required autofocus readonly value="{{ old(date('Y-m-d', time() + (60 * 60 * 24)),$model->tgl_selesai) }}">
@@ -98,7 +98,7 @@
             </div>
 
             @enderror
-          </div>
+          </div> --}}
           <div class="mb-3">
             <label for="total" class="form-label"> Total</label>
             <input type="text" class="form-control @error('total') is-invalid @enderror" id="total" name="total" required autofocus value="{{ old('total', $model->total) }}">

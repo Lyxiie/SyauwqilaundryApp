@@ -21,9 +21,17 @@
               Pesanan
             </a>
           </li>
-      </ul>
         {{-- @endif --}}
 
+          <li class="nav-item">
+            <a class="nav-link {{ Request::is('dashboard/log*') ? 'active' :'' }}" href="/dashboard/log">
+              <span data-feather="file-text"></span>
+              Riwayat Pesanan
+            </a>
+          </li>
+      </ul>
+        
+      
 
       @can('admin')
 

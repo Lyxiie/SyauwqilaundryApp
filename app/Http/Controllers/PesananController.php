@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pesanan;
 use App\Models\Layanan;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,7 @@ class PesananController extends Controller
 
         return view('dashboard.pesanan.index', [
             'pesanan' => Pesanan::all(),
+            'layanan' => Layanan::all()
 
         ]);
     }
@@ -45,7 +47,7 @@ class PesananController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Layanan $layanan)
     {
         // $model =  new Pesanan;
         // $model ->id_pesanan = $request->id_pesanan;
@@ -61,13 +63,15 @@ class PesananController extends Controller
         $model = $request->validate([
             'id_pesanan' => 'required|unique:pesanans',
             'nama' => 'required|min:3',
-            'no_hp' => 'nullable',
-            'jml_satuan' => 'required|numeric',
+            'no_hp' => 'nullable|min:10|numeric',
+            'jml_satuan' => 'required|numeric|min:1',
             'tgl_masuk' => 'required',
-            'tgl_selesai' => 'required|date|after:tgl_masuk',
-            'total' => 'required|numeric|min:0',
         ]);
+
         $model['layanan'] = $request->layanan_id;
+        $layanan = Layanan::find($request->layanan_id);
+        $model['tgl_selesai'] = date('Y-m-d', strtotime($request->tgl_masuk . ' +' . $layanan->waktu . ' days'));
+        $model['total'] = $layanan->harga_layanan * $request->jml_satuan;
         Pesanan::create($model);
         return redirect('/dashboard/pesanan')->with('success', 'Pesanan berhasil di tambahkan!');
     }
@@ -104,21 +108,58 @@ class PesananController extends Controller
      * @param  \App\Models\Pesanan  $pesanan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pesanan $pesanan)
     {
-        $model = Pesanan::find($id);
-        $model ->id_pesanan = $request->id_pesanan;
-        $model ->nama = $request->nama;
-        $model ->no_hp = $request->no_hp;
-        $model ->layanan = $request->layanan_id;
-        $model ->jml_satuan = $request->jml_satuan;
-        $model ->tgl_masuk = $request->tgl_masuk;
-        $model ->tgl_selesai = $request->tgl_selesai;
-        $model ->total = $request->total;
-        $model->save();
+        // $model = Pesanan::find($id);
+        // $model ->id_pesanan = $request->id_pesanan;
+        // $model ->nama = $request->nama;
+        // $model ->no_hp = $request->no_hp;
+        // $model ->layanan = $request->layanan_id;
+        // $model ->jml_satuan = $request->jml_satuan;
+        // $model ->tgl_masuk = $request->tgl_masuk;
+        // $model ->tgl_selesai = $request->tgl_selesai;
+        // $model ->total = $request->total;
+        // $model->save();
 
-        return redirect('dashboard/pesanan')->with('success', 'Pesanan berhasil di perbarui!');
+        // $rules = [
+        //     'nama' => 'required|min:3',
+        //     'no_hp' => 'nullable',
+        //     'tgl_masuk' => 'required',
+        // ];
+
+        // if($request->jml_satuan != $pesanan->jml_satuan) {
+        //     $rules['jml_satuan'] = 'required|numeric|min:1';
+        // }
+        // if($request->tgl_selesai != $pesanan->tgl_selesai) {
+        //     $rules['tgl_selesai'] = 'required|date|after:tgl_masuk';
+        // }
+        // if($request->total != $pesanan->total) {
+        //     $rules['total'] = 'required|numeric|min:0';
+        // }
+        // $validatedData = $request->validate($rules);
+
+
+        // Pesanan::where('id', $pesanan->id)->update($validatedData);
+
+
+        // return redirect('dashboard/pesanan')->with('success', 'Pesanan berhasil di perbarui!');
+
+        $model = $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'no_hp' => 'nullable|min:10|numeric',
+            'jml_satuan' => 'required|numeric|min:1',
+            'tgl_masuk' => 'required',
+            'total' => 'required|numeric|min:0',
+        ]);
+
+        $layanan = Layanan::find($request->layanan_id);
+        $model['layanan'] = $request->layanan_id;
+        $model['tgl_selesai'] = date('Y-m-d', strtotime($request->tgl_masuk . ' +' . $layanan->waktu . ' days'));
+
+        Pesanan::where('id', $pesanan->id)->update($model);
+        return redirect('/dashboard/pesanan')->with('success', 'Pesanan berhasil di tambahkan!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -126,10 +167,19 @@ class PesananController extends Controller
      * @param  \App\Models\Pesanan  $pesanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Log $log)
     {
         $model = Pesanan::find($id);
+        $log->id_pesanan = $model->id_pesanan;
+        $log->nama = $model->nama;
+        $log->no_hp = $model->no_hp;
+        $log->layanan = $model->layanan;
+        $log->jml_satuan = $model->jml_satuan;
+        $log->tgl_masuk = $model->tgl_masuk;
+        $log->tgl_selesai = $model->tgl_selesai;
+        $log->total = $model->total;
+        $log->save();
         $model->delete();
-        return redirect('dashboard/pesanan')->with('success', 'Pesanan dengan ID Pesanan '.$model->id_pesanan.' telah diselesaikan');
+        return redirect('/dashboard/pesanan')->with('success', 'Pesanan berhasil di hapus!');  
     }
 }

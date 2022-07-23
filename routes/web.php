@@ -10,9 +10,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\DashboardIndexController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayananController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PesananController;
 
 /*
@@ -74,7 +76,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', function() {
     return view('dashboard.index');
 })->middleware('auth');
-
+Route::get('/dashboard', [DashboardIndexController::class, 'index'])->name('dashboard')->middleware('auth');
 
 
 Route::resource('/dashboard/pesanan', PesananController::class);
@@ -84,4 +86,5 @@ Route::resource('/dashboard/users', AdminUserController::class);
 Route::resource('/dashboard/layanan', LayananController::class)->middleware('admin');
 
 Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+Route::resource('/dashboard/log', LogController::class);
 Route::get('/dashboard/cari-laporan', [LaporanController::class, 'cari']);

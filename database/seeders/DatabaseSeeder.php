@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Layanan;
+use App\Models\Pesanan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -47,6 +48,47 @@ class DatabaseSeeder extends Seeder
             'nama_layanan' => 'Express',
             'harga_layanan' => '7000',
             'waktu' => '1'
+        ]);
+
+        Pesanan::create([
+            'id_pesanan' => '001',
+            'nama' => 'Muhamad',
+            'no_hp' => '089123443212',
+            'layanan' => '1',
+            'jml_satuan' => '3',
+            'tgl_masuk' => '2022-07-23',
+            'tgl_selesai' => '2022-07-24',
+            'total' => '21000'
+        ]);
+        Pesanan::create([
+            'id_pesanan' => '002',
+            'nama' => 'Ridwan',
+            'no_hp' => '089111098897',
+            'layanan' => '2',
+            'jml_satuan' => '4',
+            'tgl_masuk' => '2022-07-23',
+            'tgl_selesai' => '2022-07-25',
+            'total' => '20000'
+        ]);
+        Pesanan::create([
+            'id_pesanan' => '003',
+            'nama' => 'Muhamad Ridwan',
+            'no_hp' => '089996766611',
+            'layanan' => '3',
+            'jml_satuan' => '5',
+            'tgl_masuk' => '2022-07-23',
+            'tgl_selesai' => '2022-07-26',
+            'total' => '15000'
+        ]);
+        Pesanan::create([
+            'id_pesanan' => '004',
+            'nama' => 'M Ridwan',
+            'no_hp' => '089995566611',
+            'layanan' => '3',
+            'jml_satuan' => '6',
+            'tgl_masuk' => '2022-07-23',
+            'tgl_selesai' => '2022-07-26',
+            'total' => '18000'
         ]);
 
         User::factory(3)->create();

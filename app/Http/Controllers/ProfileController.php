@@ -100,10 +100,10 @@ class ProfileController extends Controller
     {
 
         $rules = [
-            'name'=> ['required', 'max:255'],
-            'number' => 'required',
-            'city' => 'required',
-            'province'=> 'required'
+            'name'=> ['required', 'max:255', 'min:3'],
+            'number' => 'required|numeric',
+            'city' => 'required|min:3|max:255|String',
+            'province'=> 'required|min:3|max:255|String',
         ];
 
         if($request->username != $profile->username) {

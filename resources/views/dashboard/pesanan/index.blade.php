@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($pesanan as $pesan )
+        @foreach ($pesanan as $pesan)
 
         <tr>
           <td>{{ $loop->iteration }}</td>
@@ -38,7 +38,12 @@
           <td>{{ $pesan->nama }}</td>
           <td>{{ $pesan->no_hp }}</td>
           {{-- <td>{{ $p->tipe_layanan }}</td> --}}
-          <td>{{ $pesan->layanan }}</td>
+                @foreach ( $layanan as $l)
+                    @if ($l->id == $pesan->layanan)
+                        <td>{{ $l->nama_layanan }}</td>
+                    @endif
+                @endforeach
+          {{-- <td>{{ $pesan->layanan }}</td> --}}
           <td>{{ $pesan->jml_satuan }}</td>
           <td>{{ $pesan->tgl_masuk }}</td>
           <td>{{ $pesan->tgl_selesai }}</td>
@@ -56,7 +61,6 @@
         </td>
 
         </tr>
-
         @endforeach
     </tbody>
     </table>
